@@ -1,45 +1,45 @@
-const juegoAdivinaNumero = {
-  targetNumber: Math.floor(Math.random() * 100) + 1,
-  attempts: 0,
-  maxAttempts: 10,
+const adivinaNumero = {
+  numeroObjetivo: Math.floor(Math.random() * 100) + 1,
+  intentos: 0,
+  intentosMaximos: 10,
   historial: [],
 
   iniciar: function() {
-      this.attempts = 0;
+      this.intentos = 0;
       this.historial = [];
-      this.targetNumber = Math.floor(Math.random() * 100) + 1;
-      console.log("¡Bienvenido al juego de adivina el número! Tienes " + this.maxAttempts + " intentos para adivinar un número entre 1 y 100.");
+      this.numeroObjetivo = Math.floor(Math.random() * 100) + 1;
+      console.log("¡Bienvenido al juego de adivina el número! Tienes " + this.intentosMaximos + " intentos para adivinar un número entre 1 y 100.");
       setTimeout(() => this.jugar(), 100); // Asegura que los mensajes iniciales se muestren antes del prompt
   },
 
   jugar: function() {
-      while (this.attempts < this.maxAttempts) {
-          const guess = parseInt(prompt("Adivina el número (entre 1 y 100):"), 10);
-          if (isNaN(guess)) {
+      while (this.intentos < this.intentosMaximos) {
+          const adivinanza = parseInt(prompt("Adivina el número (entre 1 y 100):"), 10);
+          if (isNaN(adivinanza)) {
               console.log("Por favor, introduce un número válido.");
               continue;
           }
 
-          if (this.historial.includes(guess)) {
+          if (this.historial.includes(adivinanza)) {
               console.log("Ya has intentado ese número. Intenta con otro.");
               continue;
           }
 
-          this.attempts++;
-          this.historial.push(guess);
+          this.intentos++;
+          this.historial.push(adivinanza);
 
-          if (guess === this.targetNumber) {
-              console.log("¡Felicidades! Adivinaste el número en " + this.attempts + " intentos.");
+          if (adivinanza === this.numeroObjetivo) {
+              console.log("¡Felicidades! Adivinaste el número en " + this.intentos + " intentos.");
               this.mostrarHistorial();
               this.mostrarEstadisticas();
               return;
-          } else if (guess < this.targetNumber) {
-              console.log("El número es mayor. Intentos restantes: " + (this.maxAttempts - this.attempts));
+          } else if (adivinanza < this.numeroObjetivo) {
+              console.log("El número es mayor. Intentos restantes: " + (this.intentosMaximos - this.intentos));
           } else {
-              console.log("El número es menor. Intentos restantes: " + (this.maxAttempts - this.attempts));
+              console.log("El número es menor. Intentos restantes: " + (this.intentosMaximos - this.intentos));
           }
       }
-      console.log("Lo siento, se te han acabado los intentos. El número era: " + this.targetNumber);
+      console.log("Lo siento, se te han acabado los intentos. El número era: " + this.numeroObjetivo);
       this.mostrarHistorial();
       this.mostrarEstadisticas();
   },
@@ -69,6 +69,6 @@ const juegoAdivinaNumero = {
 document.addEventListener("DOMContentLoaded", function() {
   const startButton = document.getElementById("startButton");
   startButton.addEventListener("click", function() {
-      juegoAdivinaNumero.iniciar();
+      adivinaNumero.iniciar();
   });
 });
