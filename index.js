@@ -31,7 +31,6 @@ const adivinaNumero = {
           if (adivinanza === this.numeroObjetivo) {
               console.log("¡Felicidades! Adivinaste el número en " + this.intentos + " intentos.");
               this.mostrarHistorial();
-              this.mostrarEstadisticas();
               return;
           } else if (adivinanza < this.numeroObjetivo) {
               console.log("El número es mayor. Intentos restantes: " + (this.intentosMaximos - this.intentos));
@@ -41,7 +40,6 @@ const adivinaNumero = {
       }
       console.log("Lo siento, se te han acabado los intentos. El número era: " + this.numeroObjetivo);
       this.mostrarHistorial();
-      this.mostrarEstadisticas();
   },
 
   mostrarHistorial: function() {
@@ -55,15 +53,6 @@ const adivinaNumero = {
       }
   },
 
-  mostrarEstadisticas: function() {
-      if (this.historial.length > 0) {
-          const sumaIntentos = this.historial.reduce((total, intento) => total + intento, 0);
-          const promedioIntentos = sumaIntentos / this.historial.length;
-          console.log("Estadísticas de intentos:");
-          console.log("Suma total de intentos: " + sumaIntentos);
-          console.log("Promedio de intentos: " + promedioIntentos.toFixed(2));
-      }
-  }
 };
 
 document.addEventListener("DOMContentLoaded", function() {
